@@ -2,13 +2,11 @@ package fr.kalioz.eseo.icwebserver.servlets;
 
 import fr.kalioz.eseo.icwebserver.apifetch.GouvCommunes;
 import fr.kalioz.eseo.icwebserver.models.Ville;
-import org.json.JSONArray;
 
-import javax.servlet.annotation.WebServlet;
-import javax.ws.rs.*;
-import javax.ws.rs.core.MediaType;
+import javax.ws.rs.GET;
+import javax.ws.rs.POST;
+import javax.ws.rs.Path;
 import javax.ws.rs.core.Response;
-import java.util.List;
 
 //@WebServlet( loadOnStartup=1)
 @Path("/communes")

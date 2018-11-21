@@ -13,8 +13,15 @@ import java.io.StringWriter;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.Map;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class EasyHttpClient {
+    private static final Logger LOGGER = Logger.getLogger(EasyHttpClient.class.getName());
+
+    private EasyHttpClient() {
+    }
+
     public static String doRequest(String url, Map<String, String> params) {
         URIBuilder builder = new URIBuilder();
         builder.setScheme("https").setHost("geo.api.gouv.fr").setPath(url);
@@ -29,7 +36,7 @@ public class EasyHttpClient {
         try {
             uri = builder.build();
         } catch (URISyntaxException e) {
-            e.printStackTrace();
+            LOGGER.log(Level.SEVERE, e.toString(), e);
             return null;
         }
 
@@ -37,16 +44,14 @@ public class EasyHttpClient {
         HttpRequestBase request = new HttpGet(uri);
         try (CloseableHttpResponse response = httpClient.execute(request)) {
             if (response.getStatusLine().getStatusCode() != 200) {
-                System.out.println("status code != 200 - aborting :" + response.getStatusLine().getStatusCode() + " // " + uri);
+                LOGGER.log(Level.FINE, "status code != 200 - aborting :" + response.getStatusLine().getStatusCode() + " // " + uri);
                 return null;
             }
             StringWriter writer = new StringWriter();
             IOUtils.copy(response.getEntity().getContent(), writer, "utf-8");
-            String output = writer.toString();
-
-            return output;
+            return writer.toString();
         } catch (IOException e) {
-            e.printStackTrace();
+            LOGGER.log(Level.SEVERE, e.toString(), e);
         }
         return null;
     }
