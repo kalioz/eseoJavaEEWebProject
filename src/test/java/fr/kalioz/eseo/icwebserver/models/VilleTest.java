@@ -1,0 +1,46 @@
+package fr.kalioz.eseo.icwebserver.models;
+
+import org.json.JSONObject;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+
+import java.util.List;
+
+import static org.junit.jupiter.api.Assertions.*;
+
+class VilleTest {
+
+    Ville generateVille() {
+        return new Ville(new JSONObject("{'nom':'LAbergement-Clémenciat','code':'01001','codeDepartement':'01','codeRegion':'84','codesPostaux':['01400'],'population':767}"));
+    }
+
+    @BeforeEach
+    void beforeEach() {
+        Ville.cleanTable();
+    }
+
+    @Test
+    void saveOrUpdate() {
+        Ville ville = generateVille();
+        ville.saveOrUpdate();
+        //TODO add fetch
+    }
+
+    @Test
+    void getByName() {
+        Ville ville = generateVille();
+        ville.saveOrUpdate();
+
+        List<Ville> output = Ville.getByName("Abergement", 5);
+        assertTrue(output.size() >= 1);
+    }
+
+    @Test
+    void getAll() {
+    }
+
+    @Test
+    void toJson() {
+        System.out.println(generateVille().toJson());
+    }
+}
