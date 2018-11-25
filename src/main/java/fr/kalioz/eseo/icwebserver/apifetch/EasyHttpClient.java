@@ -44,7 +44,7 @@ public class EasyHttpClient {
         HttpRequestBase request = new HttpGet(uri);
         try (CloseableHttpResponse response = httpClient.execute(request)) {
             if (response.getStatusLine().getStatusCode() != 200) {
-                LOGGER.log(Level.FINE, "status code != 200 - aborting :" + response.getStatusLine().getStatusCode() + " // " + uri);
+                LOGGER.log(Level.FINE, "status code != 200 ({}) - aborting. {}", response.getStatusLine().getStatusCode());
                 return null;
             }
             StringWriter writer = new StringWriter();

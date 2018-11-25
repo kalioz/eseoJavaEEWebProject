@@ -3,18 +3,32 @@ package fr.kalioz.eseo.icwebserver.servlets;
 import fr.kalioz.eseo.icwebserver.apifetch.GouvCommunes;
 import fr.kalioz.eseo.icwebserver.models.Ville;
 
-import javax.ws.rs.GET;
-import javax.ws.rs.POST;
-import javax.ws.rs.Path;
+import javax.ws.rs.*;
+import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
-//@WebServlet( loadOnStartup=1)
 @Path("/communes")
 public class CommunesServlet {
 
+    // This method is called if TEXT_PLAIN is request
     @GET
-    public String getMsg() {
-        return "Hello WOrld";
+    @Consumes(MediaType.TEXT_PLAIN)
+    public String sayPlainTextHello() {
+        return "Hello Jersey";
+    }
+
+    // This method is called if XML is request
+    @GET
+    @Consumes(MediaType.TEXT_XML)
+    public String sayXMLHello() {
+        return "<?xml version=\"1.0\"?>" + "<hello> Hello Jersey" + "</hello>";
+    }
+
+    @GET
+    @Consumes(MediaType.TEXT_HTML)
+    public String sayHtmlHello() {
+        return "<html> " + "<title>" + "Hello Jersey" + "</title>"
+                + "<body><h1>" + "Hello Jersey" + "</body></h1>" + "</html> ";
     }
 
     /*@GET

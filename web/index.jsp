@@ -11,6 +11,6 @@
     <title>$Title$</title>
 </head>
 <body>
-$END$
+Default JSP page
 </body>
 </html>
