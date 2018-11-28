@@ -8,6 +8,11 @@
     <artifactId>EseoICJavaWeb</artifactId>
     <version>1.0-SNAPSHOT</version>
     <packaging>jar</packaging>
+
+    <properties>
+        <junit-5.version>5.2.0</junit-5.version>
+    </properties>
+
     <build>
         <plugins>
             <plugin>
@@ -48,9 +53,9 @@
                         <goals>
                             <goal>prepare-agent</goal>
                         </goals>
-                        <configuration>
+                        <!--<configuration>
                             <destFile>target/jacoco.exec</destFile>
-                        </configuration>
+                        </configuration>-->
                     </execution>
                     <execution>
                         <id>post-unit-test</id>
@@ -61,25 +66,15 @@
                     </execution>
                 </executions>
             </plugin>
+
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-surefire-plugin</artifactId>
                 <version>2.22.0</version>
                 <configuration>
                     <testFailureIgnore>true</testFailureIgnore>
+                    <test>fr.kalioz.eseo.icwebserver.TestAll</test>
                 </configuration>
-                <dependencies>
-                    <dependency>
-                        <groupId>org.junit.platform</groupId>
-                        <artifactId>junit-platform-surefire-provider</artifactId>
-                        <version>1.2.0</version>
-                    </dependency>
-                    <dependency>
-                        <groupId>org.junit.jupiter</groupId>
-                        <artifactId>junit-jupiter-engine</artifactId>
-                        <version>5.1.0</version>
-                    </dependency>
-                </dependencies>
             </plugin>
 
         </plugins>
@@ -146,22 +141,11 @@
 
 
         <!--TESTS-->
+        <!-- https://mvnrepository.com/artifact/junit/junit -->
         <dependency>
-            <groupId>org.junit.jupiter</groupId>
-            <artifactId>junit-jupiter-api</artifactId>
-            <version>RELEASE</version>
-            <scope>test</scope>
-        </dependency>
-        <dependency>
-            <groupId>org.junit.platform</groupId>
-            <artifactId>junit-platform-runner</artifactId>
-            <version>RELEASE</version>
-            <scope>test</scope>
-        </dependency>
-        <dependency>
-            <groupId>org.junit.jupiter</groupId>
-            <artifactId>junit-jupiter-engine</artifactId>
-            <version>RELEASE</version>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <version>4.12</version>
             <scope>test</scope>
         </dependency>
 

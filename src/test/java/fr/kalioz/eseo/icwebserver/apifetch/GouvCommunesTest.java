@@ -1,16 +1,16 @@
 package fr.kalioz.eseo.icwebserver.apifetch;
 
 import fr.kalioz.eseo.icwebserver.models.Ville;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
+import org.junit.Before;
+import org.junit.Test;
 
 import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.Assert.*;
 
 public class GouvCommunesTest {
 
-    @BeforeEach
+    @Before
     public void beforeEach() {
         //Ville.cleanTable();
     }

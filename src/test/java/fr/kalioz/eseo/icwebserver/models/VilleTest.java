@@ -1,12 +1,14 @@
 package fr.kalioz.eseo.icwebserver.models;
 
 import org.json.JSONObject;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
+import org.junit.Before;
+import org.junit.Test;
 
 import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertTrue;
+
 
 public class VilleTest {
 
@@ -14,7 +16,7 @@ public class VilleTest {
         return new Ville(new JSONObject("{'nom':'LAbergement-Clémenciat','code':'01001','codeDepartement':'01','codeRegion':'84','codesPostaux':['01400'],'population':767}"));
     }
 
-    @BeforeEach
+    @Before
     public void beforeEach() {
         //Ville.cleanTable();
     }
