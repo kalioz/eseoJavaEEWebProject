@@ -8,26 +8,26 @@ import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-class VilleTest {
+public class VilleTest {
 
-    Ville generateVille() {
+    public Ville generateVille() {
         return new Ville(new JSONObject("{'nom':'LAbergement-Clémenciat','code':'01001','codeDepartement':'01','codeRegion':'84','codesPostaux':['01400'],'population':767}"));
     }
 
     @BeforeEach
-    void beforeEach() {
+    public void beforeEach() {
         Ville.cleanTable();
     }
 
     @Test
-    void saveOrUpdate() {
+    public void saveOrUpdate() {
         Ville ville = generateVille();
         ville.saveOrUpdate();
         //TODO add fetch
     }
 
     @Test
-    void getByName() {
+    public void getByName() {
         Ville ville = generateVille();
         ville.saveOrUpdate();
 
@@ -36,11 +36,11 @@ class VilleTest {
     }
 
     @Test
-    void getAll() {
+    public void getAll() {
     }
 
     @Test
-    void toJson() {
+    public void toJson() {
         System.out.println(generateVille().toJson());
     }
 }

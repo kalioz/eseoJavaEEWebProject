@@ -6,7 +6,7 @@
     <session-factory>
         <!-- Database connection settings -->
         <property name="connection.driver_class">org.postgresql.Driver</property>
-        <property name="connection.url">jdbc:postgresql://169.254.0.4:5432/icdb</property>
+        <property name="connection.url">jdbc:postgresql://169.254.0.2:5432/icdb</property>
         <property name="connection.username">icdbjava</property>
         <property name="connection.password">icdbjavapassword</property>
 

@@ -8,15 +8,15 @@ import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-class GouvCommunesTest {
+public class GouvCommunesTest {
 
     @BeforeEach
-    void beforeEach() {
+    public void beforeEach() {
         Ville.cleanTable();
     }
 
     @Test
-    void getCommune() {
+    public void getCommune() {
         Ville output = GouvCommunes.getCommune(41018);//Blois
         assertNotNull(output);
         assertEquals("Blois", output.getNom());
@@ -28,13 +28,13 @@ class GouvCommunesTest {
     }
 
     @Test
-    void getCommuneByDepartement() {
+    public void getCommuneByDepartement() {
         List<Ville> output = GouvCommunes.getCommuneByDepartement(1);
         assertEquals(407, output.size());
     }
 
     @Test
-    void fetchAllDepartements() {
+    public void fetchAllDepartements() {
         assertEquals(0, Ville.getAll().size());
         GouvCommunes.fetchAndSaveAllDepartements();
         assertTrue(Ville.getAll().size() > 0);

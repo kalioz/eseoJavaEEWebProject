@@ -119,6 +119,7 @@ public class Ville {
 
     public static void cleanTable() {
         Session session = HibernateModel.getSessionFactory().getCurrentSession();
+
         session.getTransaction().begin();
         Query query = session.createQuery("DELETE FROM " + Ville.class.getName());
         query.executeUpdate();
