@@ -8,11 +8,6 @@
     <artifactId>EseoICJavaWeb</artifactId>
     <version>1.0-SNAPSHOT</version>
     <packaging>jar</packaging>
-
-    <properties>
-        <junit-5.version>5.2.0</junit-5.version>
-    </properties>
-
     <build>
         <plugins>
             <plugin>
@@ -53,9 +48,9 @@
                         <goals>
                             <goal>prepare-agent</goal>
                         </goals>
-                        <!--<configuration>
+                        <configuration>
                             <destFile>target/jacoco.exec</destFile>
-                        </configuration>-->
+                        </configuration>
                     </execution>
                     <execution>
                         <id>post-unit-test</id>
@@ -74,6 +69,9 @@
                 <configuration>
                     <testFailureIgnore>true</testFailureIgnore>
                     <test>fr.kalioz.eseo.icwebserver.TestAll</test>
+                    
+                    <useSystemClassLoader>false</useSystemClassLoader>
+
                 </configuration>
             </plugin>
 
