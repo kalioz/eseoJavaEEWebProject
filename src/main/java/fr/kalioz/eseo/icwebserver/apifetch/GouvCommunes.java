@@ -56,7 +56,7 @@ public class GouvCommunes {
         JSONArray features = jsonOutput.getJSONArray("features");
 
         for (int i = 0; i < features.length(); i++) {
-            output.add(new Ville(features.getJSONObject(0).getJSONObject("properties")));
+            output.add(new Ville(features.getJSONObject(i).getJSONObject("properties")));
         }
 
         return output;
