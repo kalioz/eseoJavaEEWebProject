@@ -66,6 +66,7 @@
                 <version>2.22.0</version>
                 <configuration>
                     <testFailureIgnore>true</testFailureIgnore>
+                    <test>fr.kalioz.eseo.icwebserver.AllTests</test>
                 </configuration>
                 <dependencies>
                     <dependency>
