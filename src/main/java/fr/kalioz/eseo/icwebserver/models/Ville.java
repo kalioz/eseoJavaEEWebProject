@@ -121,7 +121,12 @@ public class Ville {
         Session session = HibernateModel.getSessionFactory().getCurrentSession();
 
         session.getTransaction().begin();
-        Query query = session.createQuery("DELETE FROM " + Ville.class.getName());
+        Query query = session.createQuery("DELETE FROM ville_codespostaux");
+        query.executeUpdate();
+        session.getTransaction().commit();
+
+        session.getTransaction().begin();
+        query = session.createQuery("DELETE FROM " + Ville.class.getName());
         query.executeUpdate();
         session.getTransaction().commit();
     }

@@ -10,13 +10,13 @@ import static org.junit.jupiter.api.Assertions.*;
 
 public class VilleTest {
 
-    public Ville generateVille() {
+    private Ville generateVille() {
         return new Ville(new JSONObject("{'nom':'LAbergement-Clémenciat','code':'01001','codeDepartement':'01','codeRegion':'84','codesPostaux':['01400'],'population':767}"));
     }
 
     @BeforeEach
     public void beforeEach() {
-        Ville.cleanTable();
+        //Ville.cleanTable();
     }
 
     @Test
@@ -41,6 +41,6 @@ public class VilleTest {
 
     @Test
     public void toJson() {
-        System.out.println(generateVille().toJson());
+        assertNotNull(generateVille().toJson());
     }
 }

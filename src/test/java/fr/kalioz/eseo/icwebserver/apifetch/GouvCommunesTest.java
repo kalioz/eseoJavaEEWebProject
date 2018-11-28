@@ -12,7 +12,7 @@ public class GouvCommunesTest {
 
     @BeforeEach
     public void beforeEach() {
-        Ville.cleanTable();
+        //Ville.cleanTable();
     }
 
     @Test
