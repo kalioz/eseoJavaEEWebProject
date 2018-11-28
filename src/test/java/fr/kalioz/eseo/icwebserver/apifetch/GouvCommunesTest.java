@@ -34,9 +34,9 @@ public class GouvCommunesTest {
     }
 
     @Test
-    public void fetchAllDepartements() {
+    public void fetchAndSaveDepartement() {
         assertEquals(0, Ville.getAll().size());
-        GouvCommunes.fetchAndSaveAllDepartements();
+        GouvCommunes.fetchAndSaveDepartement(1);
         assertTrue(Ville.getAll().size() > 0);
     }
 }
