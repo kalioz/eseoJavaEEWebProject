@@ -1,14 +1,20 @@
 package fr.kalioz.eseo.icwebserver.models;
 
-import org.hibernate.Session;
 import org.hibernate.SessionFactory;
-import org.hibernate.boot.Metadata;
 import org.hibernate.boot.MetadataSources;
 import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
 import org.hibernate.service.ServiceRegistry;
 
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 public class HibernateModel {
     private static final SessionFactory sessionFactory = buildSessionFactory();
+
+    private static Logger logger = Logger.getLogger(HibernateModel.class.getName());
+
+    private HibernateModel() {
+    }
 
     private static SessionFactory buildSessionFactory() {
         try {
@@ -17,9 +23,8 @@ public class HibernateModel {
 
             // Create a metadata sources using the specified service registry.
             return new MetadataSources(serviceRegistry).buildMetadata().buildSessionFactory();
-        } catch (Throwable ex) {
-
-            System.err.println("Initial SessionFactory creation failed." + ex);
+        } catch (Exception ex) {
+            logger.log(Level.FINE, "Initial SessionFactory creation failed. {0}", ex);
             throw new ExceptionInInitializerError(ex);
         }
     }

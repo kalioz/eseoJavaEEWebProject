@@ -17,7 +17,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 public class EasyHttpClient {
-    private static final Logger LOGGER = Logger.getLogger(EasyHttpClient.class.getName());
+    private static final Logger logger = Logger.getLogger(EasyHttpClient.class.getName());
 
     private EasyHttpClient() {
     }
@@ -36,23 +36,32 @@ public class EasyHttpClient {
         try {
             uri = builder.build();
         } catch (URISyntaxException e) {
-            LOGGER.log(Level.SEVERE, e.toString(), e);
+            logger.log(Level.SEVERE, e.toString(), e);
             return null;
         }
 
-        CloseableHttpClient httpClient = HttpClients.createDefault();
-        System.out.println("GET " + uri.toString());
-        HttpRequestBase request = new HttpGet(uri);
-        try (CloseableHttpResponse response = httpClient.execute(request)) {
+        CloseableHttpResponse response = null;
+
+        try (CloseableHttpClient httpClient = HttpClients.createDefault()) {
+            logger.log(Level.FINE, "GET {0}.", uri);
+            HttpRequestBase request = new HttpGet(uri);
+            response = httpClient.execute(request);
             if (response.getStatusLine().getStatusCode() != 200) {
-                LOGGER.log(Level.FINE, "status code != 200 ({}) - aborting. {}", response.getStatusLine().getStatusCode());
+                logger.log(Level.FINE, "status code != 200 ({0}.) - aborting.", response.getStatusLine().getStatusCode());
                 return null;
             }
             StringWriter writer = new StringWriter();
             IOUtils.copy(response.getEntity().getContent(), writer, "utf-8");
             return writer.toString();
         } catch (IOException e) {
-            LOGGER.log(Level.SEVERE, e.toString(), e);
+            logger.log(Level.SEVERE, e.toString(), e);
+        } finally {
+            if (response != null)
+                try {
+                    response.close();
+                } catch (IOException e) {
+                    logger.log(Level.SEVERE, e.toString(), e);
+                }
         }
         return null;
     }
