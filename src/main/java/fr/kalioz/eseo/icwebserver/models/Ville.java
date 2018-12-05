@@ -5,17 +5,19 @@ import org.hibernate.query.Query;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
-import javax.persistence.ElementCollection;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Logger;
 
 
 @Entity
 @Table(name = "VILLES")
 public class Ville {
+
+    private static final String GEOMETRY = "geometry";
+
+    private static Logger logger = Logger.getLogger(Ville.class.getName());
 
     @Id
     public String code;// == id
@@ -37,7 +39,6 @@ public class Ville {
     public Ville(JSONObject ville) {
         JSONObject properties = ville.getJSONObject("properties");
         nom = properties.getString("nom");
-        //TODO maybe just parse as string and then int ?
         code = properties.getString("code");
         codeDepartement = properties.getString("codeDepartement");
         codeRegion = properties.getString("codeRegion");
@@ -49,11 +50,11 @@ public class Ville {
         for (int i = 0; i < cp.length(); i++) {
             codesPostaux.add(cp.getString(i));
         }
-        if (ville.has("geometry")) {
-            longitude = ville.getJSONObject("geometry").getJSONArray("coordinates").getFloat(0);
-            latitude = ville.getJSONObject("geometry").getJSONArray("coordinates").getFloat(1);
+        if (ville.has(GEOMETRY)) {
+            longitude = ville.getJSONObject(GEOMETRY).getJSONArray("coordinates").getFloat(0);
+            latitude = ville.getJSONObject(GEOMETRY).getJSONArray("coordinates").getFloat(1);
         } else {
-            System.out.println("ERROR - no GEOMETRY param found in json");
+            logger.fine("ERROR - no GEOMETRY param found in json");
         }
     }
 
@@ -129,11 +130,7 @@ public class Ville {
 
     public static void cleanTable() {
         Session session = HibernateModel.getSessionFactory().getCurrentSession();
-
-        session.getTransaction().begin();
-        Query query = session.createQuery("DELETE FROM ville_codespostaux");
-        query.executeUpdate();
-        session.getTransaction().commit();
+        Query query;
 
         session.getTransaction().begin();
         query = session.createQuery("DELETE FROM " + Ville.class.getName());
@@ -156,4 +153,6 @@ public class Ville {
     public void setLatitude(float latitude) {
         this.latitude = latitude;
     }
+
+
 }
