@@ -1,26 +1,22 @@
 package fr.kalioz.eseo.icwebserver.apifetch;
 
 import fr.kalioz.eseo.icwebserver.models.Ville;
-import org.apache.commons.io.IOUtils;
-import org.apache.http.client.methods.CloseableHttpResponse;
-import org.apache.http.client.methods.HttpGet;
-import org.apache.http.client.methods.HttpRequestBase;
-import org.apache.http.client.utils.URIBuilder;
-import org.apache.http.impl.client.CloseableHttpClient;
-import org.apache.http.impl.client.HttpClients;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
-import java.io.IOException;
-import java.io.StringWriter;
-import java.net.URI;
-import java.net.URISyntaxException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.logging.Logger;
 
 public class GouvCommunes {
+
+    private GouvCommunes() {
+    }
+
+    private static Logger logger = Logger.getLogger(GouvCommunes.class.getName());
+
     public static Ville getCommune(int id) {
         Map<String, String> params = new HashMap<>();
         params.put("format", "geojson");
@@ -32,7 +28,7 @@ public class GouvCommunes {
         JSONObject jsonOutput = new JSONObject(output);
         JSONArray features = jsonOutput.getJSONArray("features");
         if (features.length() != 1) {
-            System.out.println("error - len(features) != 1; features : " + features.toString());
+            logger.fine("error - len(features) != 1;");
             return null;
         }
         JSONObject city = features.getJSONObject(0);
@@ -50,7 +46,7 @@ public class GouvCommunes {
         params.put("format", "geojson");
         String tmp = EasyHttpClient.doRequest("/departements/" + id + "/communes", params);
         if (tmp == null) {
-            return null;
+            return output;
         }
         JSONObject jsonOutput = new JSONObject(tmp);
         JSONArray features = jsonOutput.getJSONArray("features");
@@ -69,9 +65,7 @@ public class GouvCommunes {
 
     public static void fetchAndSaveDepartement(String id) {
         List<Ville> villes = getCommuneByDepartement(id);
-        if (villes == null) {
-            return;
-        }
+
         for (Ville v : villes) {
             v.saveOrUpdate();
         }
