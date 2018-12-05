@@ -25,6 +25,9 @@ public class Ville {
     private String codeRegion;// == id region
     private int population;
 
+    private float longitude;//vertical
+    private float latitude;//horizontal
+
     @ElementCollection
     private List<String> codesPostaux;
 
@@ -32,18 +35,25 @@ public class Ville {
     }
 
     public Ville(JSONObject ville) {
-        nom = ville.getString("nom");
+        JSONObject properties = ville.getJSONObject("properties");
+        nom = properties.getString("nom");
         //TODO maybe just parse as string and then int ?
-        code = ville.getString("code");
-        codeDepartement = ville.getString("codeDepartement");
-        codeRegion = ville.getString("codeRegion");
-        population = ville.getInt("population");
+        code = properties.getString("code");
+        codeDepartement = properties.getString("codeDepartement");
+        codeRegion = properties.getString("codeRegion");
+        population = properties.getInt("population");
 
         codesPostaux = new ArrayList<String>() {
         };
-        JSONArray cp = ville.getJSONArray("codesPostaux");
+        JSONArray cp = properties.getJSONArray("codesPostaux");
         for (int i = 0; i < cp.length(); i++) {
             codesPostaux.add(cp.getString(i));
+        }
+        if (ville.has("geometry")) {
+            longitude = ville.getJSONObject("geometry").getJSONArray("coordinates").getFloat(0);
+            latitude = ville.getJSONObject("geometry").getJSONArray("coordinates").getFloat(1);
+        } else {
+            System.out.println("ERROR - no GEOMETRY param found in json");
         }
     }
 
@@ -129,5 +139,21 @@ public class Ville {
         query = session.createQuery("DELETE FROM " + Ville.class.getName());
         query.executeUpdate();
         session.getTransaction().commit();
+    }
+
+    public float getLongitude() {
+        return longitude;
+    }
+
+    public void setLongitude(float longitude) {
+        this.longitude = longitude;
+    }
+
+    public float getLatitude() {
+        return latitude;
+    }
+
+    public void setLatitude(float latitude) {
+        this.latitude = latitude;
     }
 }

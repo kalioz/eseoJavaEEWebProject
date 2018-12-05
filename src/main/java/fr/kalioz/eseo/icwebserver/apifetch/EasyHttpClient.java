@@ -41,6 +41,7 @@ public class EasyHttpClient {
         }
 
         CloseableHttpClient httpClient = HttpClients.createDefault();
+        System.out.println("GET " + uri.toString());
         HttpRequestBase request = new HttpGet(uri);
         try (CloseableHttpResponse response = httpClient.execute(request)) {
             if (response.getStatusLine().getStatusCode() != 200) {

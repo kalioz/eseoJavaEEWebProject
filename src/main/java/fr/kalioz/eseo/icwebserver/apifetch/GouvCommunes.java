@@ -35,7 +35,7 @@ public class GouvCommunes {
             System.out.println("error - len(features) != 1; features : " + features.toString());
             return null;
         }
-        JSONObject city = features.getJSONObject(0).getJSONObject("properties");
+        JSONObject city = features.getJSONObject(0);
         return new Ville(city);
     }
 
@@ -56,7 +56,7 @@ public class GouvCommunes {
         JSONArray features = jsonOutput.getJSONArray("features");
 
         for (int i = 0; i < features.length(); i++) {
-            output.add(new Ville(features.getJSONObject(i).getJSONObject("properties")));
+            output.add(new Ville(features.getJSONObject(i)));
         }
 
         return output;
