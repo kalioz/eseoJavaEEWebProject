@@ -3,6 +3,7 @@ package fr.kalioz.eseo.icwebserver.models;
 import org.hibernate.Session;
 import org.hibernate.query.Query;
 import org.json.JSONArray;
+import org.json.JSONException;
 import org.json.JSONObject;
 
 import javax.persistence.*;
@@ -37,24 +38,31 @@ public class Ville {
     }
 
     public Ville(JSONObject ville) {
-        JSONObject properties = ville.getJSONObject("properties");
-        nom = properties.getString("nom");
-        code = properties.getString("code");
-        codeDepartement = properties.getString("codeDepartement");
-        codeRegion = properties.getString("codeRegion");
-        population = properties.getInt("population");
+        try {
+            JSONObject properties = ville.getJSONObject("properties");
+            nom = properties.getString("nom");
+            code = properties.getString("code");
+            codeDepartement = properties.getString("codeDepartement");
+            codeRegion = properties.getString("codeRegion");
+            if (ville.has("population")) {
+                population = properties.getInt("population");
+            }
 
-        codesPostaux = new ArrayList<String>() {
-        };
-        JSONArray cp = properties.getJSONArray("codesPostaux");
-        for (int i = 0; i < cp.length(); i++) {
-            codesPostaux.add(cp.getString(i));
-        }
-        if (ville.has(GEOMETRY)) {
-            longitude = ville.getJSONObject(GEOMETRY).getJSONArray("coordinates").getFloat(0);
-            latitude = ville.getJSONObject(GEOMETRY).getJSONArray("coordinates").getFloat(1);
-        } else {
-            logger.fine("ERROR - no GEOMETRY param found in json");
+            codesPostaux = new ArrayList<String>() {
+            };
+            JSONArray cp = properties.getJSONArray("codesPostaux");
+            for (int i = 0; i < cp.length(); i++) {
+                codesPostaux.add(cp.getString(i));
+            }
+            if (ville.has(GEOMETRY)) {
+                longitude = ville.getJSONObject(GEOMETRY).getJSONArray("coordinates").getFloat(0);
+                latitude = ville.getJSONObject(GEOMETRY).getJSONArray("coordinates").getFloat(1);
+            } else {
+                logger.fine("ERROR - no GEOMETRY param found in json");
+            }
+        } catch (JSONException e) {
+            logger.finest("JSON couldn't be parsed - " + ville.toString() + " --- " + e.getMessage());
+            throw e;
         }
     }
 

@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.logging.Level;
 import java.util.logging.Logger;
 
 public class GouvCommunes {
@@ -73,6 +74,7 @@ public class GouvCommunes {
 
     public static void fetchAndSaveAllDepartements() {
         for (int i = 1; i < 83 + 1; i++) {
+            logger.log(Level.FINE, "fetching departement {0}", i);
             if (i == 20) {//corse
                 fetchAndSaveDepartement("2A");
                 fetchAndSaveDepartement("2B");
