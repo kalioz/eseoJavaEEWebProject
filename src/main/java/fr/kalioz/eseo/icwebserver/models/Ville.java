@@ -44,7 +44,7 @@ public class Ville {
             code = properties.getString("code");
             codeDepartement = properties.getString("codeDepartement");
             codeRegion = properties.getString("codeRegion");
-            if (ville.has("population")) {
+            if (properties.has("population")) {
                 population = properties.getInt("population");
             }
 
@@ -119,7 +119,7 @@ public class Ville {
         Session session = HibernateModel.getSessionFactory().getCurrentSession();
         session.getTransaction().begin();
 
-        String sql = "FROM " + Ville.class.getName() + " AS v WHERE v.nom LIKE ?1 ORDER BY v.code";
+        String sql = "FROM " + Ville.class.getName() + " AS v WHERE LOWER(v.nom) LIKE LOWER(?1) ORDER BY v.population DESC";
 
         Query<Ville> query = session.createQuery(sql);
         query.setParameter(1, "%" + name + "%");
