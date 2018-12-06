@@ -40,7 +40,7 @@ public class GouvCommunesTest {
         assertTrue(Ville.getAll().size() > 0);
     }
 
-    @Test
+    //@Test
     public void fetchAndSaveAll() {
         assertEquals(0, Ville.getAll().size());
         GouvCommunes.fetchAndSaveAllDepartements();
