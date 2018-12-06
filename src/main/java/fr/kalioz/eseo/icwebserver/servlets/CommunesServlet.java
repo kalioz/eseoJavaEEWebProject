@@ -29,6 +29,6 @@ public class CommunesServlet {
     public Response updateDatabase() {
         Ville.cleanTable();
         GouvCommunes.fetchAndSaveAllDepartements();
-        return Response.status(200).build();
+        return Response.status(200).entity("done !").build();
     }
 }
