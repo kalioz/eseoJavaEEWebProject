@@ -20,7 +20,12 @@ To use this project, you need :
 * GET /api/communes
   
   params=name,limit
+  
   get the communes listed in the database.
+
+* POST /api/communes/update
+
+  update the database. takes a good 30s though, don't do it lightly
   
 
 

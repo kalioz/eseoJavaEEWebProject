@@ -1,9 +1,166 @@
 <html>
 <head>
-    <title>$Title$</title>
+    <title>Calculateur de distances</title>
+    <meta charset="UTF-8">
+
+    <link href="https://netdna.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.6.3/css/bootstrap-select.min.css"/>
+    <!--use jquery autocomplete-->
 </head>
-<body>
-Default HTML page
-<a href="/api/communes">click me</a>
+<body ng-app="eseoDistanceCalculator" ng-controller="EDCController">
+<div class="container">
+    <div class="row-fluid">
+        <select class="selectpicker" data-live-search="true">
+            <option ng-repeat="city in cities" data-subtext="{{city.population}} habitants">{{city.nom}}</option>
+        </select>
+        <span class="help-inline">With <code>data-show-subtext="true" data-live-search="true"</code>. Try searching for california</span>
+    </div>
+</div>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.6.3/js/bootstrap-select.min.js"></script>
+</body>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.7.5/angular.js"></script>
+
+<script>
+    var app = angular.module("eseoDistanceCalculator", []);
+    app.controller("EDCController", function ($scope) {
+        $scope.cities = [{
+            "code": "75056",
+            "codesPostaux": null,
+            "latitude": 48.844955,
+            "codeRegion": "11",
+            "nom": "Paris",
+            "codeDepartement": "75",
+            "population": 2229621,
+            "longitude": 2.3760848
+        }, {
+            "code": "13055",
+            "codesPostaux": null,
+            "latitude": 43.259335,
+            "codeRegion": "93",
+            "nom": "Marseille",
+            "codeDepartement": "13",
+            "population": 855393,
+            "longitude": 5.370368
+        }, {
+            "code": "69123",
+            "codesPostaux": null,
+            "latitude": 45.76757,
+            "codeRegion": "84",
+            "nom": "Lyon",
+            "codeDepartement": "69",
+            "population": 500715,
+            "longitude": 4.823975
+        }, {
+            "code": "31555",
+            "codesPostaux": null,
+            "latitude": 43.607903,
+            "codeRegion": "76",
+            "nom": "Toulouse",
+            "codeDepartement": "31",
+            "population": 458298,
+            "longitude": 1.43831
+        }, {
+            "code": "06088",
+            "codesPostaux": null,
+            "latitude": 43.710377,
+            "codeRegion": "93",
+            "nom": "Nice",
+            "codeDepartement": "06",
+            "population": 342295,
+            "longitude": 7.2679944
+        }, {
+            "code": "44109",
+            "codesPostaux": null,
+            "latitude": 47.235435,
+            "codeRegion": "52",
+            "nom": "Nantes",
+            "codeDepartement": "44",
+            "population": 292718,
+            "longitude": -1.549468
+        }, {
+            "code": "67482",
+            "codesPostaux": null,
+            "latitude": 48.57316,
+            "codeRegion": "44",
+            "nom": "Strasbourg",
+            "codeDepartement": "67",
+            "population": 275718,
+            "longitude": 7.7533937
+        }, {
+            "code": "34172",
+            "codesPostaux": null,
+            "latitude": 43.622955,
+            "codeRegion": "76",
+            "nom": "Montpellier",
+            "codeDepartement": "34",
+            "population": 272084,
+            "longitude": 3.858515
+        }, {
+            "code": "33063",
+            "codesPostaux": null,
+            "latitude": 44.85852,
+            "codeRegion": "75",
+            "nom": "Bordeaux",
+            "codeDepartement": "33",
+            "population": 243626,
+            "longitude": -0.5906001
+        }, {
+            "code": "59350",
+            "codesPostaux": null,
+            "latitude": 50.63453,
+            "codeRegion": "32",
+            "nom": "Lille",
+            "codeDepartement": "59",
+            "population": 231491,
+            "longitude": 3.0510685
+        }];
+    });
+</script>
+</html>
+<!--
+<html>
+<head>
+    <title>Calculateur de distances</title>
+
+
+    &lt;!&ndash;Bootstrap&ndash;&gt;
+    <link href="//netdna.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" rel="stylesheet">
+
+    &lt;!&ndash; Latest compiled and minified CSS &ndash;&gt;
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.13.2/css/bootstrap-select.min.css">
+</head>
+<body >
+
+&lt;!&ndash;city choice&ndash;&gt;
+<div class="container">
+    <div class="row-fluid">
+        <select class="selectpicker" data-live-search="true">
+            <option data-tokens="ketchup mustard">Hot Dog, Fries and a Soda</option>
+            <option data-tokens="mustard">Burger, Shake and a Smile</option>
+            <option data-tokens="frosting">Sugar, Spice and all things nice</option>
+        </select>
+    </div>
+</div>
+
+
+
+<script src="https://code.jquery.com/jquery-3.3.1.min.js"
+        integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+        crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.6.3/js/bootstrap-select.min.js"></script>
+
+&lt;!&ndash;<script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.7.5/angular.js"
+        integrity="sha256-RflTGBQTyWuRHcjjgRTBrkLLntUWrNMmqMBV6vB7+Lw=" crossorigin="anonymous"></script>&ndash;&gt;
+&lt;!&ndash;<script src="app.js"></script>&ndash;&gt;
+<script>
+    $('.selectpicker').selectpicker();
+</script>
 </body>
 </html>
+-->
