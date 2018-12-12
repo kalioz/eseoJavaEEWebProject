@@ -9,16 +9,6 @@
 </head>
 <body>
 
-<style>
-    .spanPop {
-        color: #9f9e9e;
-    }
-
-    .center {
-        text-align: center;
-    }
-</style>
-
 <div id="app" class="container">
     <h1>City Distance</h1>
     <div class="row">
@@ -98,6 +88,13 @@
             </div>
         </div>
     </div>
+    <!--<div>
+        <img src="carte_france.jpg" class="w100">
+        <svg class="w100 h100">
+            <circle v-if="city1 !== null" cx="{{lat2svg(city1.latitude)}}" cy="{{lon2svg(city1.lontitude)}}" r="{{circleSize(city1.population)}}" fill="fill" color="red"/>
+
+        </svg>
+    </div>-->
 </div>
 
 <script src="https://unpkg.com/vue@latest"></script>

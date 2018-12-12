@@ -4,6 +4,10 @@ A simple JavaEE project I used to build a DevOps Environment using jenkins, sona
 
 This project fetch all french cities from the [official API](https://api.gouv.fr/api/api-geo.html) and deploy a webapp enabling the user to get the distance between two cities.
 
+Aperçu : 
+
+![](gif/jeeproject.gif)
+
 ### Setup
 
 To use this project, you need :

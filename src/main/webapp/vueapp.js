@@ -34,6 +34,9 @@ new Vue({
             var d = R * Math.acos(Math.cos(lat1) * Math.cos(lat2) * Math.cos(lon2 - lon1) + Math.sin(lat1) * Math.sin(lat2));
 
             return Math.round(d * 100) / 100;
+        },
+        lat2svg: function lat2svg(lat) {
+
         }
     }
 });

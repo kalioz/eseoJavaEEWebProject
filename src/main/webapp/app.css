@@ -1,18 +1,6 @@
-img {
-    height: auto;
-    max-width: 2.5rem;
-    margin-right: 1rem;
-}
-
 .d-center {
     display: flex;
     align-items: center;
-}
-
-.selected img {
-    width: auto;
-    max-height: 23px;
-    margin-right: 0.5rem;
 }
 
 .v-select .dropdown li {
@@ -32,4 +20,20 @@ img {
 
 .v-select .dropdown-menu .active > a {
     color: #fff;
+}
+
+.spanPop {
+    color: #9f9e9e;
+}
+
+.center {
+    text-align: center;
+}
+
+.w100 {
+    width: 100%;
+}
+
+.h100 {
+    height: 100%;
 }
