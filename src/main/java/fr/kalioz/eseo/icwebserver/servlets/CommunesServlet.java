@@ -24,7 +24,7 @@ public class CommunesServlet {
         return Response.status(200).entity(output.toString()).build();
     }
 
-    @GET
+    @POST
     @Path("/update")
     public Response updateDatabase() {
         Ville.cleanTable();
