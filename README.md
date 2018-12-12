@@ -39,5 +39,5 @@ To use this project, you need :
   JavaEE - Jersey - Hibernate
 * Front:
 
-  AngularJS
+  VueJS
 
