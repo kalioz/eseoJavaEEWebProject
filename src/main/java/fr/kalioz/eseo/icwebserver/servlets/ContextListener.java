@@ -2,6 +2,7 @@ package fr.kalioz.eseo.icwebserver.servlets;
 
 import fr.kalioz.eseo.icwebserver.apifetch.EasyHttpClient;
 import fr.kalioz.eseo.icwebserver.apifetch.GouvCommunes;
+import fr.kalioz.eseo.icwebserver.models.Ville;
 
 import javax.servlet.ServletContextEvent;
 import javax.servlet.ServletContextListener;
@@ -17,8 +18,12 @@ public class ContextListener implements ServletContextListener {
 
     @Override
     public void contextInitialized(ServletContextEvent servletContextEvent) {
-        logger.log(Level.FINE, "initializing the database... please wait");
-        GouvCommunes.fetchAndSaveAllDepartements();
-        logger.log(Level.FINE, "database initialized !");
+        if (Ville.getAll().size() > 0) {
+            logger.log(Level.FINE, "database already initiliazed - passing init");
+        } else {
+            logger.log(Level.FINE, "initializing the database... please wait");
+            GouvCommunes.fetchAndSaveAllDepartements();
+            logger.log(Level.FINE, "database initialized !");
+        }
     }
 }

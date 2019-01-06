@@ -4,6 +4,10 @@ import fr.kalioz.eseo.icwebserver.models.Ville;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
+import java.io.BufferedWriter;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -75,6 +79,7 @@ public class GouvCommunes {
     public static void fetchAndSaveAllDepartements() {
         for (int i = 1; i < 83 + 1; i++) {
             logger.log(Level.FINE, "fetching departement {0}", i);
+            System.out.println("departement #" + i);
             if (i == 20) {//corse
                 fetchAndSaveDepartement("2A");
                 fetchAndSaveDepartement("2B");
@@ -84,5 +89,23 @@ public class GouvCommunes {
         }
     }
 
+    public static void exportInSQL(String fileName) {
+        List<Ville> villes = Ville.getAll();
+        try (FileWriter fileWriter = new FileWriter(fileName); PrintWriter printWriter = new PrintWriter(fileWriter)) {
+            for (Ville v : villes) {
+                System.out.println("writing " + v.getNom());
+                printWriter.printf("('%s','%s','%s','%s','%s','%s','%s'),\n",
+                        v.getCode(),
+                        v.getNom().replace("'", " "),
+                        v.getMainCodePostal(),
+                        v.getNom().replace("'", " "),
+                        "",
+                        v.getLatitude(),
+                        v.getLongitude());
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
 
 }

@@ -46,4 +46,11 @@ public class GouvCommunesTest {
         GouvCommunes.fetchAndSaveAllDepartements();
         assertTrue(Ville.getAll().size() > 0);
     }
+
+    @Test
+    public void exportSQL() {
+        String path = "./dump.sql";
+        GouvCommunes.fetchAndSaveAllDepartements();
+        GouvCommunes.exportInSQL(path);
+    }
 }

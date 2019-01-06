@@ -34,6 +34,12 @@ public class Ville {
     @ElementCollection
     private List<String> codesPostaux;
 
+    public String getMainCodePostal() {
+        return mainCodePostal;
+    }
+
+    private String mainCodePostal;
+
     public Ville() {
     }
 
@@ -52,6 +58,9 @@ public class Ville {
             };
             JSONArray cp = properties.getJSONArray("codesPostaux");
             for (int i = 0; i < cp.length(); i++) {
+                if (i == 0) {
+                    mainCodePostal = cp.getString(i);
+                }
                 codesPostaux.add(cp.getString(i));
             }
             if (ville.has(GEOMETRY)) {
